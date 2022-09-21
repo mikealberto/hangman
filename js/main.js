@@ -37,7 +37,7 @@ function handleLetterContainerClick(evt) {
     messageDisplayEl.innerText = "Correct! Try Again!";
     correctLetters.forEach(function (letter, idx) {
       if (letter === letterPlayerSelected) {
-        lineDashesEl[idx].innerText = letterPlayerSelected;
+        guessInputSlotEl.childNodes[idx].innerText = letterPlayerSelected;
       }
     });
   }
@@ -56,7 +56,6 @@ function inputSlotDisplay() {
   for (let i = 0; i < hiddenWord.length; i++) {
     guessInputSlotEl.innerHTML += `<span class="line-dash"> _ </span>`;
   }
-  lineDashesEl = document.querySelectorAll(".line-dash");
 }
 
 //Game Initiated
