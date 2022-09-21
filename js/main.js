@@ -8,7 +8,7 @@ const WORD_BANK = [
   "compile",
 ];
 /*----- app's state (variables) -----*/
-let hiddenWord, correctLetters;
+let hiddenWord, correctLetters, wrongGuesses;
 
 /*----- cached element references -----*/
 const messageDisplayEl = document.querySelector("h2");
@@ -22,6 +22,7 @@ letterContainerEl.addEventListener("click", handleLetterContainerClick);
 function init() {
   hiddenWord = "";
   correctLetters = [];
+  wrongGuesses = [];
   messageDisplayEl.innerText =
     "Welcome! Enter a letter to help reveal the hidden word!";
   hiddenWord = hiddenWordGenerator();
@@ -43,9 +44,14 @@ function handleLetterContainerClick(evt) {
           buttonClicked.disabled = true;
         }
       });
+      //check if you won
+    } else {
+      messageDisplayEl.innerText = "Wrong! Try again!";
+      buttonClicked.disabled = true;
+      wrongGuesses.push(letterPlayerSelected);
+      console.log(wrongGuesses.length);
+      //check if you lost
     }
-  } else {
-    console.log("you did not hit a button");
   }
 }
 
@@ -63,6 +69,9 @@ function inputSlotDisplay() {
     guessInputSlotEl.innerHTML += `<span class="line-dash"> _ </span>`;
   }
 }
+
+// function checkWin() {}
+//function renderNotifications ()
 
 //Game Initiated
 init();
