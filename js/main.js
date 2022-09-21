@@ -8,7 +8,7 @@ const WORD_BANK = [
   "compile",
 ];
 /*----- app's state (variables) -----*/
-let hiddenWord, correctLetters, lineDashesEl;
+let hiddenWord, correctLetters;
 
 /*----- cached element references -----*/
 const messageDisplayEl = document.querySelector("h2");
@@ -32,14 +32,20 @@ function init() {
 }
 
 function handleLetterContainerClick(evt) {
-  const letterPlayerSelected = evt.target.innerText;
-  if (hiddenWord.includes(letterPlayerSelected)) {
-    messageDisplayEl.innerText = "Correct! Try Again!";
-    correctLetters.forEach(function (letter, idx) {
-      if (letter === letterPlayerSelected) {
-        guessInputSlotEl.childNodes[idx].innerText = letterPlayerSelected;
-      }
-    });
+  if (evt.target.id !== "letter-container") {
+    const buttonClicked = evt.target;
+    const letterPlayerSelected = evt.target.innerText;
+    if (hiddenWord.includes(letterPlayerSelected)) {
+      messageDisplayEl.innerText = "Correct! Try Again!";
+      correctLetters.forEach(function (letter, idx) {
+        if (letter === letterPlayerSelected) {
+          guessInputSlotEl.childNodes[idx].innerText = letterPlayerSelected;
+          buttonClicked.disabled = true;
+        }
+      });
+    }
+  } else {
+    console.log("you did not hit a button");
   }
 }
 
