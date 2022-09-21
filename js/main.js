@@ -8,7 +8,7 @@ const WORD_BANK = [
   "compile",
 ];
 /*----- app's state (variables) -----*/
-let hiddenWord, correctLetters;
+let hiddenWord, correctLetters, lineDashesEl;
 
 /*----- cached element references -----*/
 const messageDisplayEl = document.querySelector("h2");
@@ -26,18 +26,24 @@ function init() {
     "Welcome! Enter a letter to help reveal the hidden word!";
   hiddenWord = hiddenWordGenerator();
   console.log("init function ", hiddenWord);
+  correctLetters = hiddenWord.split("");
+  //display dashes
   inputSlotDisplay();
 }
 
 function handleLetterContainerClick(evt) {
-  console.log(evt.target);
   const letterPlayerSelected = evt.target.innerText;
-  //   if (hiddenWord.includes(letterPlayerSelected)) {
-  //     // console.log("Right Letter");
-  //   }
+  if (hiddenWord.includes(letterPlayerSelected)) {
+    messageDisplayEl.innerText = "Correct! Try Again!";
+    correctLetters.forEach(function (letter, idx) {
+      if (letter === letterPlayerSelected) {
+        lineDashesEl[idx].innerText = letterPlayerSelected;
+      }
+    });
+  }
 }
 
-//Helper Function
+//Helper Functions
 
 //Elects Hidden Word for Game
 function hiddenWordGenerator() {
@@ -50,6 +56,7 @@ function inputSlotDisplay() {
   for (let i = 0; i < hiddenWord.length; i++) {
     guessInputSlotEl.innerHTML += `<span class="line-dash"> _ </span>`;
   }
+  lineDashesEl = document.querySelectorAll(".line-dash");
 }
 
 //Game Initiated
