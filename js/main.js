@@ -32,16 +32,26 @@ function init() {
   winStatus = false;
   lostStatus = false;
   correctLetterCount = 0;
+  console.log("init", hiddenWord.length);
   render();
 }
 
 function render() {
-  messageDisplayEl.innerText =
-    "Welcome! Enter a letter to help reveal the hidden word!";
-  hiddenWord = hiddenWordGenerator();
-  // console.log("init function ", hiddenWord);
-  correctLetters = hiddenWord.split("");
-  inputSlotDisplay();
+  if (hiddenWord.length === 0) {
+    messageDisplayEl.innerText =
+      "Welcome! Enter a letter to help reveal the hidden word!";
+    hiddenWord = hiddenWordGenerator();
+    // console.log("init function ", hiddenWord);
+    correctLetters = hiddenWord.split("");
+    inputSlotDisplay();
+  } else if (hiddenWord.length > 0) {
+    if (winStatus) {
+      messageDisplayEl.innerText =
+        "Congrats, you won. Hit Reset to play again!";
+    } else {
+      messageDisplayEl.innerText = "Correct! Try Again!";
+    }
+  }
 }
 
 function handleLetterContainerClick(evt) {
@@ -58,12 +68,7 @@ function handleLetterContainerClick(evt) {
         buttonClicked.disabled = true;
       });
       checkWin();
-      if (winStatus) {
-        messageDisplayEl.innerText =
-          "Congrats, you won. Hit Reset to play again!";
-      } else {
-        messageDisplayEl.innerText = "Correct! Try Again!";
-      }
+      render();
     } else {
       buttonClicked.disabled = true;
       wrongGuesses.push(letterPlayerSelected);
