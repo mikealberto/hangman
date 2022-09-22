@@ -54,6 +54,7 @@ function render() {
       disableAllLetters();
     } else {
       messageDisplayEl.innerText = "Correct! Try Again!";
+      buttonClicked.disabled = true;
     }
   } else {
     if (gameStatus === -1) {
@@ -62,6 +63,7 @@ function render() {
       disableAllLetters();
     } else {
       messageDisplayEl.innerText = "Wrong! Try again!";
+      buttonClicked.disabled = true;
     }
   }
 }
@@ -78,13 +80,11 @@ function handleLetterContainerClick(evt) {
           console.log("correctLetterCount", correctLetterCount);
           guessInputSlotEl.childNodes[idx].innerText = letterPlayerSelected;
         }
-        buttonClicked.disabled = true;
       });
       checkWin();
       render();
     } else {
       correctGuess = false;
-      buttonClicked.disabled = true;
       wrongGuesses.push(letterPlayerSelected);
       console.log("wrongGuesses", wrongGuesses.length);
       checkWin();
