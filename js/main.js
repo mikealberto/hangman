@@ -37,6 +37,8 @@ function init() {
   correctLetterCount = 0;
   buttonClicked = null;
   letterPlayerSelected = null;
+  guessInputSlotEl.innerHTML = "";
+  toggleAllLetters(false);
   console.log("init", hiddenWord.length);
   render();
   console.log("init function ", hiddenWord);
@@ -53,7 +55,6 @@ function render() {
     if (gameStatus === 1) {
       messageDisplayEl.innerText =
         "Congrats, you won. Hit Reset to play again!";
-      // disableAllLetters();
       toggleAllLetters(true);
     } else {
       messageDisplayEl.innerText = "Correct! Try Again!";
@@ -63,7 +64,6 @@ function render() {
     if (gameStatus === -1) {
       messageDisplayEl.innerText =
         "Sometimes you win ... sometimes you LOSE. Reset to try again";
-      // disableAllLetters();
       toggleAllLetters(true);
     } else {
       messageDisplayEl.innerText = "Wrong! Try again!";
@@ -99,8 +99,6 @@ function handleLetterContainerClick(evt) {
 
 function handleResetButtonClick(evt) {
   console.log("reset click");
-  guessInputSlotEl.innerHTML = "";
-  toggleAllLetters(false);
   init();
 }
 
@@ -134,27 +132,13 @@ function checkWin() {
   }
 }
 
-//function to disable all button in the letter container when the game has concluded
-//Game concludes when the game has been won or lost
-// function disableAllLetters() {
-//   // console.log(letterContainerEl.childElementCount);
-//   allLetterButtons = document.querySelectorAll(".letter");
-//   allLetterButtons.forEach(function (button) {
-//     console.log(button.disabled);
-//     button.disabled = true;
-//     console.log(button.disabled);
-//   });
-//   // console.log(allLetterButtons);
-// }
-
+//function to enable/disable all letter-buttons in the letter container when the game has concluded and reset
 function toggleAllLetters(value) {
   allLetterButtons = document.querySelectorAll(".letter");
   allLetterButtons.forEach(function (button) {
     button.disabled = value;
-    // console.log(button.disabled);
   });
 }
 
-//conclude game function
 //Game Initiated
 init();
