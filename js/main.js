@@ -21,9 +21,11 @@ let hiddenWord,
 const messageDisplayEl = document.querySelector("h2");
 const letterContainerEl = document.getElementById("letter-container");
 const guessInputSlotEl = document.getElementById("guess-input-slot");
+const resetButtonEl = document.getElementById("reset-button");
 
 /*----- event listeners -----*/
 letterContainerEl.addEventListener("click", handleLetterContainerClick);
+resetButtonEl.addEventListener("click", handleResetButtonClick);
 
 /*----- functions -----*/
 function init() {
@@ -37,6 +39,7 @@ function init() {
   letterPlayerSelected = null;
   console.log("init", hiddenWord.length);
   render();
+  console.log("init function ", hiddenWord);
 }
 
 function render() {
@@ -44,7 +47,6 @@ function render() {
     messageDisplayEl.innerText =
       "Welcome! Enter a letter to help reveal the hidden word!";
     hiddenWord = hiddenWordGenerator();
-    // console.log("init function ", hiddenWord);
     correctLetters = hiddenWord.split("");
     inputSlotDisplay();
   } else if (hiddenWord.length > 0 && correctGuess === true) {
@@ -91,6 +93,12 @@ function handleLetterContainerClick(evt) {
       render();
     }
   }
+}
+
+function handleResetButtonClick(evt) {
+  console.log("reset click");
+  console.log((guessInputSlotEl.innerHTML = ""));
+  init();
 }
 
 //Helper Functions
