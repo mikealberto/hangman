@@ -9,7 +9,12 @@ const WORD_BANK = [
 ];
 const MAX_GUESSES = 8;
 /*----- app's state (variables) -----*/
-let hiddenWord, correctLetters, wrongGuesses, winStatus, lostStatus;
+let hiddenWord,
+  correctLetters,
+  wrongGuesses,
+  winStatus,
+  lostStatus,
+  correctLetterCount;
 
 /*----- cached element references -----*/
 const messageDisplayEl = document.querySelector("h2");
@@ -25,6 +30,8 @@ function init() {
   correctLetters = [];
   wrongGuesses = [];
   winStatus = false;
+  lostStatus = false;
+  correctLetterCount = 0;
 
   messageDisplayEl.innerText =
     "Welcome! Enter a letter to help reveal the hidden word!";
@@ -40,18 +47,25 @@ function handleLetterContainerClick(evt) {
     const buttonClicked = evt.target;
     const letterPlayerSelected = evt.target.innerText;
     if (hiddenWord.includes(letterPlayerSelected)) {
-      messageDisplayEl.innerText = "Correct! Try Again!";
       correctLetters.forEach(function (letter, idx) {
         if (letter === letterPlayerSelected) {
+          ++correctLetterCount;
+          console.log("correctLetterCount", correctLetterCount);
           guessInputSlotEl.childNodes[idx].innerText = letterPlayerSelected;
-          buttonClicked.disabled = true;
         }
+        buttonClicked.disabled = true;
       });
-      //check if you won
+      checkWin();
+      if (winStatus) {
+        messageDisplayEl.innerText =
+          "Congrats, you won. Hit Reset to play again!";
+      } else {
+        messageDisplayEl.innerText = "Correct! Try Again!";
+      }
     } else {
       buttonClicked.disabled = true;
       wrongGuesses.push(letterPlayerSelected);
-      console.log(wrongGuesses.length);
+      console.log("wrongGuesses", wrongGuesses.length);
       checkWin();
       if (lostStatus) {
         messageDisplayEl.innerText =
@@ -79,6 +93,15 @@ function inputSlotDisplay() {
 }
 
 function checkWin() {
+  if (hiddenWord.length === correctLetterCount) {
+    console.log(
+      "hiddenWord.length",
+      hiddenWord.length,
+      "correctLetterCount",
+      correctLetterCount
+    );
+    winStatus = true;
+  }
   if (wrongGuesses.length === MAX_GUESSES) {
     lostStatus = true;
   }
