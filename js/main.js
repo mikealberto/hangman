@@ -51,6 +51,7 @@ function render() {
     if (gameStatus === 1) {
       messageDisplayEl.innerText =
         "Congrats, you won. Hit Reset to play again!";
+      disableAllLetters();
     } else {
       messageDisplayEl.innerText = "Correct! Try Again!";
     }
@@ -58,6 +59,7 @@ function render() {
     if (gameStatus === -1) {
       messageDisplayEl.innerText =
         "Sometimes you win ... sometimes you LOSE. Reset to try again";
+      disableAllLetters();
     } else {
       messageDisplayEl.innerText = "Wrong! Try again!";
     }
@@ -119,6 +121,17 @@ function checkWin() {
   if (wrongGuesses.length === MAX_GUESSES) {
     gameStatus = -1;
   }
+}
+
+//function to disable all button in the letter container when the game has concluded
+//Game concludes when the game has been won or lost
+function disableAllLetters() {
+  // console.log(letterContainerEl.childElementCount);
+  allLetterButtons = document.querySelectorAll(".letter");
+  allLetterButtons.forEach(function (button) {
+    button.disabled = true;
+  });
+  // console.log(allLetterButtons);
 }
 
 //conclude game function
