@@ -9,7 +9,13 @@ const WORD_BANK = [
 ];
 const MAX_GUESSES = 8;
 /*----- app's state (variables) -----*/
-let hiddenWord, correctLetters, wrongGuesses, correctLetterCount, correctGuess;
+let hiddenWord,
+  correctLetters,
+  wrongGuesses,
+  correctLetterCount,
+  correctGuess,
+  buttonClicked,
+  letterPlayerSelected;
 
 /*----- cached element references -----*/
 const messageDisplayEl = document.querySelector("h2");
@@ -27,6 +33,8 @@ function init() {
   gameStatus = 0;
   correctGuess = false;
   correctLetterCount = 0;
+  buttonClicked = null;
+  letterPlayerSelected = null;
   console.log("init", hiddenWord.length);
   render();
 }
@@ -58,8 +66,8 @@ function render() {
 
 function handleLetterContainerClick(evt) {
   if (evt.target.id !== "letter-container") {
-    const buttonClicked = evt.target;
-    const letterPlayerSelected = evt.target.innerText;
+    buttonClicked = evt.target;
+    letterPlayerSelected = evt.target.innerText;
     if (hiddenWord.includes(letterPlayerSelected)) {
       correctLetters.forEach(function (letter, idx) {
         correctGuess = true;
