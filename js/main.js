@@ -7,8 +7,9 @@ const WORD_BANK = [
   "class",
   "compile",
 ];
+const MAX_GUESSES = 8;
 /*----- app's state (variables) -----*/
-let hiddenWord, correctLetters, wrongGuesses;
+let hiddenWord, correctLetters, wrongGuesses, winStatus, lostStatus;
 
 /*----- cached element references -----*/
 const messageDisplayEl = document.querySelector("h2");
@@ -23,6 +24,8 @@ function init() {
   hiddenWord = "";
   correctLetters = [];
   wrongGuesses = [];
+  winStatus = false;
+
   messageDisplayEl.innerText =
     "Welcome! Enter a letter to help reveal the hidden word!";
   hiddenWord = hiddenWordGenerator();
@@ -46,11 +49,16 @@ function handleLetterContainerClick(evt) {
       });
       //check if you won
     } else {
-      messageDisplayEl.innerText = "Wrong! Try again!";
       buttonClicked.disabled = true;
       wrongGuesses.push(letterPlayerSelected);
       console.log(wrongGuesses.length);
-      //check if you lost
+      checkWin();
+      if (lostStatus) {
+        messageDisplayEl.innerText =
+          "Sometimes you win ... sometimes you LOSE. Reset to try again";
+      } else {
+        messageDisplayEl.innerText = "Wrong! Try again!";
+      }
     }
   }
 }
@@ -70,7 +78,13 @@ function inputSlotDisplay() {
   }
 }
 
-// function checkWin() {}
+function checkWin() {
+  if (wrongGuesses.length === MAX_GUESSES) {
+    lostStatus = true;
+  }
+}
+
+//conclude game function
 //function renderNotifications ()
 
 //Game Initiated
