@@ -53,7 +53,8 @@ function render() {
     if (gameStatus === 1) {
       messageDisplayEl.innerText =
         "Congrats, you won. Hit Reset to play again!";
-      disableAllLetters();
+      // disableAllLetters();
+      toggleAllLetters(true);
     } else {
       messageDisplayEl.innerText = "Correct! Try Again!";
       buttonClicked.disabled = true;
@@ -62,7 +63,8 @@ function render() {
     if (gameStatus === -1) {
       messageDisplayEl.innerText =
         "Sometimes you win ... sometimes you LOSE. Reset to try again";
-      disableAllLetters();
+      // disableAllLetters();
+      toggleAllLetters(true);
     } else {
       messageDisplayEl.innerText = "Wrong! Try again!";
       buttonClicked.disabled = true;
@@ -97,7 +99,8 @@ function handleLetterContainerClick(evt) {
 
 function handleResetButtonClick(evt) {
   console.log("reset click");
-  console.log((guessInputSlotEl.innerHTML = ""));
+  guessInputSlotEl.innerHTML = "";
+  toggleAllLetters(false);
   init();
 }
 
@@ -133,13 +136,23 @@ function checkWin() {
 
 //function to disable all button in the letter container when the game has concluded
 //Game concludes when the game has been won or lost
-function disableAllLetters() {
-  // console.log(letterContainerEl.childElementCount);
+// function disableAllLetters() {
+//   // console.log(letterContainerEl.childElementCount);
+//   allLetterButtons = document.querySelectorAll(".letter");
+//   allLetterButtons.forEach(function (button) {
+//     console.log(button.disabled);
+//     button.disabled = true;
+//     console.log(button.disabled);
+//   });
+//   // console.log(allLetterButtons);
+// }
+
+function toggleAllLetters(value) {
   allLetterButtons = document.querySelectorAll(".letter");
   allLetterButtons.forEach(function (button) {
-    button.disabled = true;
+    button.disabled = value;
+    // console.log(button.disabled);
   });
-  // console.log(allLetterButtons);
 }
 
 //conclude game function
