@@ -32,13 +32,15 @@ function init() {
   winStatus = false;
   lostStatus = false;
   correctLetterCount = 0;
+  render();
+}
 
+function render() {
   messageDisplayEl.innerText =
     "Welcome! Enter a letter to help reveal the hidden word!";
   hiddenWord = hiddenWordGenerator();
-  console.log("init function ", hiddenWord);
+  // console.log("init function ", hiddenWord);
   correctLetters = hiddenWord.split("");
-  //display dashes
   inputSlotDisplay();
 }
 
@@ -84,7 +86,7 @@ function hiddenWordGenerator() {
   return WORD_BANK[Math.floor(Math.random() * WORD_BANK.length)].toUpperCase();
 }
 
-//display slot
+//display dashes that are allocated for correct guesses
 //Has to be done dynamically because we yet don't know the length of the word
 function inputSlotDisplay() {
   for (let i = 0; i < hiddenWord.length; i++) {
@@ -94,12 +96,12 @@ function inputSlotDisplay() {
 
 function checkWin() {
   if (hiddenWord.length === correctLetterCount) {
-    console.log(
-      "hiddenWord.length",
-      hiddenWord.length,
-      "correctLetterCount",
-      correctLetterCount
-    );
+    // console.log(
+    //   "hiddenWord.length",
+    //   hiddenWord.length,
+    //   "correctLetterCount",
+    //   correctLetterCount
+    // );
     winStatus = true;
   }
   if (wrongGuesses.length === MAX_GUESSES) {
