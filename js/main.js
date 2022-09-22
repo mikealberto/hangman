@@ -9,12 +9,7 @@ const WORD_BANK = [
 ];
 const MAX_GUESSES = 8;
 /*----- app's state (variables) -----*/
-let hiddenWord,
-  correctLetters,
-  wrongGuesses,
-  winStatus,
-  lostStatus,
-  correctLetterCount;
+let hiddenWord, correctLetters, wrongGuesses, correctLetterCount, correctGuess;
 
 /*----- cached element references -----*/
 const messageDisplayEl = document.querySelector("h2");
@@ -29,8 +24,8 @@ function init() {
   hiddenWord = "";
   correctLetters = [];
   wrongGuesses = [];
-  winStatus = false;
-  lostStatus = false;
+  gameStatus = 0;
+  correctGuess = false;
   correctLetterCount = 0;
   console.log("init", hiddenWord.length);
   render();
@@ -44,12 +39,19 @@ function render() {
     // console.log("init function ", hiddenWord);
     correctLetters = hiddenWord.split("");
     inputSlotDisplay();
-  } else if (hiddenWord.length > 0) {
-    if (winStatus) {
+  } else if (hiddenWord.length > 0 && correctGuess === true) {
+    if (gameStatus === 1) {
       messageDisplayEl.innerText =
         "Congrats, you won. Hit Reset to play again!";
     } else {
       messageDisplayEl.innerText = "Correct! Try Again!";
+    }
+  } else {
+    if (gameStatus === -1) {
+      messageDisplayEl.innerText =
+        "Sometimes you win ... sometimes you LOSE. Reset to try again";
+    } else {
+      messageDisplayEl.innerText = "Wrong! Try again!";
     }
   }
 }
@@ -60,6 +62,7 @@ function handleLetterContainerClick(evt) {
     const letterPlayerSelected = evt.target.innerText;
     if (hiddenWord.includes(letterPlayerSelected)) {
       correctLetters.forEach(function (letter, idx) {
+        correctGuess = true;
         if (letter === letterPlayerSelected) {
           ++correctLetterCount;
           console.log("correctLetterCount", correctLetterCount);
@@ -70,16 +73,12 @@ function handleLetterContainerClick(evt) {
       checkWin();
       render();
     } else {
+      correctGuess = false;
       buttonClicked.disabled = true;
       wrongGuesses.push(letterPlayerSelected);
       console.log("wrongGuesses", wrongGuesses.length);
       checkWin();
-      if (lostStatus) {
-        messageDisplayEl.innerText =
-          "Sometimes you win ... sometimes you LOSE. Reset to try again";
-      } else {
-        messageDisplayEl.innerText = "Wrong! Try again!";
-      }
+      render();
     }
   }
 }
@@ -107,15 +106,13 @@ function checkWin() {
     //   "correctLetterCount",
     //   correctLetterCount
     // );
-    winStatus = true;
+    gameStatus = 1;
   }
   if (wrongGuesses.length === MAX_GUESSES) {
-    lostStatus = true;
+    gameStatus = -1;
   }
 }
 
 //conclude game function
-//function renderNotifications ()
-
 //Game Initiated
 init();
