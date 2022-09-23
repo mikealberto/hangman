@@ -7,7 +7,7 @@ const WORD_BANK = [
   "class",
   "compile",
 ];
-const MAX_GUESSES = 8;
+const MAX_GUESSES = 7;
 /*----- app's state (variables) -----*/
 let hiddenWord,
   correctLetters,
