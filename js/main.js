@@ -149,9 +149,21 @@ const context = canvas.getContext("2d");
 console.log(context);
 
 function startTemplate() {
-  context.moveTo(10, 130);
-  context.lineTo(130, 130);
+  cleanCanvas();
+  lineDesign(10, 130, 130, 130);
+  // cleanCanvas();
+}
+
+//function to assist with designing line
+function lineDesign(startX, startY, endX, endY) {
+  context.moveTo(startX, startY);
+  context.lineTo(endX, endY);
   context.stroke();
+}
+
+//function to clean canvas
+function cleanCanvas() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
 //Game Initiated
 init();
