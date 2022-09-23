@@ -38,7 +38,7 @@ The game Hangman is a long-time classic in which the player aims to guess the le
 
 ## 🚀Getting Started:
 
-Link to Game:
+Link to Game: [Hangman](https://mikealberto.github.io/hangman/)
 
 ### 👨🏽‍🏫Game Instructions to player
 
