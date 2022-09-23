@@ -158,6 +158,20 @@ function startTemplate() {
   lineDesign(65, 10, 150, 10);
   //rope
   lineDesign(150, 10, 150, 35);
+  //head
+  context.beginPath();
+  context.arc(150, 45, 10, 0, Math.PI * 2, true);
+  context.stroke();
+  //body
+  lineDesign(150, 55, 150, 95);
+  //left arm
+  lineDesign(150, 65, 135, 70);
+  //right arm
+  lineDesign(150, 65, 165, 70);
+  //left leg
+  lineDesign(150, 95, 140, 118);
+  //right leg
+  lineDesign(150, 95, 160, 118);
 }
 
 //function to assist with designing line
