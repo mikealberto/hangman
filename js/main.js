@@ -31,7 +31,6 @@ resetButtonEl.addEventListener("click", handleResetButtonClick);
 
 /*----- functions -----*/
 function init() {
-  // Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document.
   context = canvasEl.getContext("2d");
   hiddenWord = "";
   correctLetters = [];
@@ -106,13 +105,9 @@ function handleResetButtonClick(evt) {
 
 function hangmanConstruction(wrongGuessNum) {
   switch (wrongGuessNum) {
-    //head
     case 0:
-      //bottom line
       lineDesign(10, 130, 130, 130);
-      //middle line
       lineDesign(65, 10, 65, 130);
-      //top line
       lineDesign(65, 10, 150, 10);
       break;
     case 1:
@@ -120,36 +115,29 @@ function hangmanConstruction(wrongGuessNum) {
       context.arc(150, 45, 10, 0, Math.PI * 2, true);
       context.stroke();
       break;
-    //body
     case 2:
       lineDesign(150, 55, 150, 95);
       break;
-    //left arm
     case 3:
       lineDesign(150, 65, 135, 70);
       break;
-    //right arm
     case 4:
       lineDesign(150, 65, 165, 70);
       break;
-    //left leg
     case 5:
       lineDesign(150, 95, 140, 118);
       break;
-    //right leg
     case 6:
       lineDesign(150, 95, 160, 118);
       break;
-    //rope
     case 7:
       lineDesign(150, 10, 150, 35);
       break;
   }
 }
 
-//Helper Functions
+/*----- Helper Functions -----*/
 
-//Elects Hidden Word for Game
 function hiddenWordGenerator() {
   return WORD_BANK[Math.floor(Math.random() * WORD_BANK.length)].toUpperCase();
 }
@@ -187,7 +175,6 @@ function lineDesign(startX, startY, endX, endY) {
   context.stroke();
 }
 
-//function to clean canvas
 function cleanCanvas() {
   context.clearRect(0, 0, canvasEl.width, canvasEl.height);
 }
