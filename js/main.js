@@ -42,6 +42,7 @@ function init() {
   console.log("init", hiddenWord.length);
   render();
   console.log("init function ", hiddenWord);
+  startTemplate();
 }
 
 function render() {
@@ -140,5 +141,17 @@ function toggleAllLetters(value) {
   });
 }
 
+//Hangman Design
+const canvas = document.getElementById("hangman-canvas");
+console.log(canvas);
+// Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document.
+const context = canvas.getContext("2d");
+console.log(context);
+
+function startTemplate() {
+  context.moveTo(10, 130);
+  context.lineTo(130, 130);
+  context.stroke();
+}
 //Game Initiated
 init();
