@@ -38,11 +38,12 @@ function init() {
   buttonClicked = null;
   letterPlayerSelected = null;
   guessInputSlotEl.innerHTML = "";
+  cleanCanvas();
   toggleAllLetters(false);
   console.log("init", hiddenWord.length);
   render();
   console.log("init function ", hiddenWord);
-  startTemplate();
+  // startTemplate();
 }
 
 function render() {
@@ -52,6 +53,7 @@ function render() {
     hiddenWord = hiddenWordGenerator();
     correctLetters = hiddenWord.split("");
     inputSlotDisplay();
+    hangmanConstruction(wrongGuesses.length);
   } else if (hiddenWord.length > 0 && correctGuess === true) {
     if (gameStatus === 1) {
       messageDisplayEl.innerText =
@@ -62,6 +64,7 @@ function render() {
       buttonClicked.disabled = true;
     }
   } else {
+    hangmanConstruction(wrongGuesses.length);
     if (gameStatus === -1) {
       messageDisplayEl.innerText =
         "Sometimes you win ... sometimes you LOSE. Reset to try again";
@@ -148,19 +151,27 @@ console.log(canvas);
 const context = canvas.getContext("2d");
 console.log(context);
 
-function startTemplate() {
-  cleanCanvas();
-  //bottom line
-  lineDesign(10, 130, 130, 130);
-  //middle line
-  lineDesign(65, 10, 65, 130);
-  //top line
-  lineDesign(65, 10, 150, 10);
-}
+// function startTemplate() {
+//   // cleanCanvas();
+//   //bottom line
+//   lineDesign(10, 130, 130, 130);
+//   //middle line
+//   lineDesign(65, 10, 65, 130);
+//   //top line
+//   lineDesign(65, 10, 150, 10);
+// }
 
 function hangmanConstruction(wrongGuessNum) {
   switch (wrongGuessNum) {
     //head
+    case 0:
+      //bottom line
+      lineDesign(10, 130, 130, 130);
+      //middle line
+      lineDesign(65, 10, 65, 130);
+      //top line
+      lineDesign(65, 10, 150, 10);
+      break;
     case 1:
       context.beginPath();
       context.arc(150, 45, 10, 0, Math.PI * 2, true);
