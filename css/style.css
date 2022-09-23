@@ -4,6 +4,11 @@
 }
 body {
   background-color: #457b9d;
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
 
 h1 {
@@ -18,6 +23,7 @@ h1 {
   border-color: #1d3557;
   border-radius: 20px;
   background-color: #023e8a;
+  padding: 5px;
 }
 
 h2 {
@@ -36,7 +42,19 @@ canvas {
 }
 
 #letter-container {
-  /* text-align: center; */
+  text-align: center;
   display: flex;
-  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px;
+  width: 50%;
+  background-color: #023e8a;
+  border-style: solid;
+  border-color: #1d3557;
+  border-radius: 20px;
+  padding: 1em;
+}
+.letter {
+  font-size: 25px;
+  margin: auto;
 }
