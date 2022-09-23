@@ -15,13 +15,15 @@ let hiddenWord,
   correctLetterCount,
   correctGuess,
   buttonClicked,
-  letterPlayerSelected;
+  letterPlayerSelected,
+  context;
 
 /*----- cached element references -----*/
 const messageDisplayEl = document.querySelector("h2");
 const letterContainerEl = document.getElementById("letter-container");
 const guessInputSlotEl = document.getElementById("guess-input-slot");
 const resetButtonEl = document.getElementById("reset-button");
+const canvas = document.getElementById("hangman-canvas");
 
 /*----- event listeners -----*/
 letterContainerEl.addEventListener("click", handleLetterContainerClick);
@@ -29,6 +31,8 @@ resetButtonEl.addEventListener("click", handleResetButtonClick);
 
 /*----- functions -----*/
 function init() {
+  // Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document.
+  context = canvas.getContext("2d");
   hiddenWord = "";
   correctLetters = [];
   wrongGuesses = [];
@@ -100,43 +104,6 @@ function handleResetButtonClick(evt) {
   init();
 }
 
-//Helper Functions
-
-//Elects Hidden Word for Game
-function hiddenWordGenerator() {
-  return WORD_BANK[Math.floor(Math.random() * WORD_BANK.length)].toUpperCase();
-}
-
-//display dashes that are allocated for correct guesses
-//Has to be done dynamically because we yet don't know the length of the word
-function inputSlotDisplay() {
-  for (let i = 0; i < hiddenWord.length; i++) {
-    guessInputSlotEl.innerHTML += `<span class="line-dash"> _ </span>`;
-  }
-}
-
-function checkWin() {
-  if (hiddenWord.length === correctLetterCount) {
-    gameStatus = 1;
-  }
-  if (wrongGuesses.length === MAX_GUESSES) {
-    gameStatus = -1;
-  }
-}
-
-//function to enable/disable all letter-buttons in the letter container when the game has concluded and reset
-function toggleAllLetters(value) {
-  allLetterButtons = document.querySelectorAll(".letter");
-  allLetterButtons.forEach(function (button) {
-    button.disabled = value;
-  });
-}
-
-//Hangman Design
-const canvas = document.getElementById("hangman-canvas");
-// Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document.
-const context = canvas.getContext("2d");
-
 function hangmanConstruction(wrongGuessNum) {
   switch (wrongGuessNum) {
     //head
@@ -179,7 +146,40 @@ function hangmanConstruction(wrongGuessNum) {
       break;
   }
 }
-//function to assist with designing line
+
+//Helper Functions
+
+//Elects Hidden Word for Game
+function hiddenWordGenerator() {
+  return WORD_BANK[Math.floor(Math.random() * WORD_BANK.length)].toUpperCase();
+}
+
+//display dashes that are allocated for correct guesses
+//Has to be done dynamically because we yet don't know the length of the word
+function inputSlotDisplay() {
+  for (let i = 0; i < hiddenWord.length; i++) {
+    guessInputSlotEl.innerHTML += `<span class="line-dash"> _ </span>`;
+  }
+}
+
+function checkWin() {
+  if (hiddenWord.length === correctLetterCount) {
+    gameStatus = 1;
+  }
+  if (wrongGuesses.length === MAX_GUESSES) {
+    gameStatus = -1;
+  }
+}
+
+//function to enable/disable all letter-buttons in the letter container when the game has concluded and reset
+function toggleAllLetters(value) {
+  allLetterButtons = document.querySelectorAll(".letter");
+  allLetterButtons.forEach(function (button) {
+    button.disabled = value;
+  });
+}
+
+//function to assist with designing lines
 function lineDesign(startX, startY, endX, endY) {
   context.beginPath();
   context.moveTo(startX, startY);
@@ -191,5 +191,6 @@ function lineDesign(startX, startY, endX, endY) {
 function cleanCanvas() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
+
 //Game Initiated
 init();
