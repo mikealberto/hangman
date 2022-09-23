@@ -23,7 +23,7 @@ const messageDisplayEl = document.querySelector("h2");
 const letterContainerEl = document.getElementById("letter-container");
 const guessInputSlotEl = document.getElementById("guess-input-slot");
 const resetButtonEl = document.getElementById("reset-button");
-const canvas = document.getElementById("hangman-canvas");
+const canvasEl = document.getElementById("hangman-canvas");
 
 /*----- event listeners -----*/
 letterContainerEl.addEventListener("click", handleLetterContainerClick);
@@ -32,7 +32,7 @@ resetButtonEl.addEventListener("click", handleResetButtonClick);
 /*----- functions -----*/
 function init() {
   // Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document.
-  context = canvas.getContext("2d");
+  context = canvasEl.getContext("2d");
   hiddenWord = "";
   correctLetters = [];
   wrongGuesses = [];
@@ -189,7 +189,7 @@ function lineDesign(startX, startY, endX, endY) {
 
 //function to clean canvas
 function cleanCanvas() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.clearRect(0, 0, canvasEl.width, canvasEl.height);
 }
 
 //Game Initiated
