@@ -150,8 +150,14 @@ console.log(context);
 
 function startTemplate() {
   cleanCanvas();
+  //bottom line
   lineDesign(10, 130, 130, 130);
-  // cleanCanvas();
+  //middle line
+  lineDesign(65, 10, 65, 130);
+  //top line
+  lineDesign(65, 10, 150, 10);
+  //rope
+  lineDesign(150, 10, 150, 35);
 }
 
 //function to assist with designing line
