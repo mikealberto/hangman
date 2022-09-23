@@ -40,10 +40,7 @@ function init() {
   guessInputSlotEl.innerHTML = "";
   cleanCanvas();
   toggleAllLetters(false);
-  console.log("init", hiddenWord.length);
   render();
-  console.log("init function ", hiddenWord);
-  // startTemplate();
 }
 
 function render() {
@@ -85,7 +82,6 @@ function handleLetterContainerClick(evt) {
         correctGuess = true;
         if (letter === letterPlayerSelected) {
           ++correctLetterCount;
-          console.log("correctLetterCount", correctLetterCount);
           guessInputSlotEl.childNodes[idx].innerText = letterPlayerSelected;
         }
       });
@@ -94,7 +90,6 @@ function handleLetterContainerClick(evt) {
     } else {
       correctGuess = false;
       wrongGuesses.push(letterPlayerSelected);
-      console.log("wrongGuesses", wrongGuesses.length);
       checkWin();
       render();
     }
@@ -102,7 +97,6 @@ function handleLetterContainerClick(evt) {
 }
 
 function handleResetButtonClick(evt) {
-  console.log("reset click");
   init();
 }
 
@@ -123,12 +117,6 @@ function inputSlotDisplay() {
 
 function checkWin() {
   if (hiddenWord.length === correctLetterCount) {
-    // console.log(
-    //   "hiddenWord.length",
-    //   hiddenWord.length,
-    //   "correctLetterCount",
-    //   correctLetterCount
-    // );
     gameStatus = 1;
   }
   if (wrongGuesses.length === MAX_GUESSES) {
@@ -146,20 +134,8 @@ function toggleAllLetters(value) {
 
 //Hangman Design
 const canvas = document.getElementById("hangman-canvas");
-console.log(canvas);
 // Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document.
 const context = canvas.getContext("2d");
-console.log(context);
-
-// function startTemplate() {
-//   // cleanCanvas();
-//   //bottom line
-//   lineDesign(10, 130, 130, 130);
-//   //middle line
-//   lineDesign(65, 10, 65, 130);
-//   //top line
-//   lineDesign(65, 10, 150, 10);
-// }
 
 function hangmanConstruction(wrongGuessNum) {
   switch (wrongGuessNum) {
