@@ -6,17 +6,29 @@ The game Hangman is a long-time classic in which the player aims to guess the le
 
 ## 📸Screenshots
 
+### Start of Game
+
+![game-initiated](https://github.com/mikealberto/hangman/blob/dev/assets/start-of-game%20Small.png)
+
 ### Guessing the right letter
 
-![Right-letter](https://github.com/mikealberto/hangman/blob/dev/assets/guessing-letter-right%20Small.png)
+![right-letter](https://github.com/mikealberto/hangman/blob/dev/assets/guessing-letter-right%20Small.png)
 
 ### Guessing the wrong letter
 
+![wrong-letter](https://github.com/mikealberto/hangman/blob/dev/assets/guessing-letter-wrong%20Small.png)
+
 ### Winning the game
+
+![winning-game](https://github.com/mikealberto/hangman/blob/dev/assets/winning-the-game%20Small.png)
 
 ### Losing the game
 
+![losing-game](https://github.com/mikealberto/hangman/blob/dev/assets/losing-the-game%20Small.png)
+
 ### Restarting the game
+
+![resetting-game](https://github.com/mikealberto/hangman/blob/dev/assets/reseting-the-game%20Small.png)
 
 ## 💻TECHNOLOGIES USED:
 
